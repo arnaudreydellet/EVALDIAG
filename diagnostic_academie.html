@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Académie des Maths — Évaluation diagnostique</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --border: #e5e2da;
+    --border2: #d0cdc4;
+    --ink: #1c1a16;
+    --ink2: #6b6760;
+    --ink3: #a09d96;
+    --accent: #1a4fd6;
+    --accent-light: #e8effe;
+    --success: #1a8a4a;
+    --success-light: #e6f7ed;
+    --warn: #b85c00;
+    --warn-light: #fef3e6;
+    --danger: #c4000f;
+    --danger-light: #fde8ea;
+    --tag-6: #6b21a8;
+    --tag-6-bg: #f3e8ff;
+    --tag-5: #1d4ed8;
+    --tag-5-bg: #eff6ff;
+    --tag-4: #0f766e;
+    --tag-4-bg: #f0fdfa;
+    --tag-3: #b45309;
+    --tag-3-bg: #fffbeb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--ink);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .logo-mark {
+    width: 40px; height: 40px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    color: white;
+    font-style: italic;
+  }
+
+  .logo-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .logo-text span { color: #93b4ff; }
+
+  .header-badge {
+    margin-left: auto;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* INTRO */
+  .intro-block {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+
+  .intro-block h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+  }
+
+  .intro-block p {
+    color: var(--ink2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .consignes {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .consigne-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink2);
+  }
+
+  .consigne-badge.interdit { border-color: #fca5a5; background: #fef2f2; color: #dc2626; }
+  .consigne-badge.oblig { border-color: #86efac; background: #f0fdf4; color: #16a34a; }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    margin-bottom: 32px;
+  }
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    color: var(--ink3);
+    font-family: 'Geist Mono', monospace;
+  }
+
+  .progress-track {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* SECTION */
+  .section-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .section-header {
+    padding: 20px 28px;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .section-sub {
+    font-size: 0.78rem;
+    color: var(--ink3);
+    margin-left: auto;
+    font-family: 'Geist Mono', monospace;
+  }
+
+  /* QUESTION */
+  .question-block {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .question-block:last-child { border-bottom: none; }
+
+  .question-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .q-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink3);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .level-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .tag-6eme { background: var(--tag-6-bg); color: var(--tag-6); }
+  .tag-5eme { background: var(--tag-5-bg); color: var(--tag-5); }
+  .tag-4eme { background: var(--tag-4-bg); color: var(--tag-4); }
+  .tag-3eme { background: var(--tag-3-bg); color: var(--tag-3); }
+
+  .question-text {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.9rem;
+    color: var(--ink2);
+  }
+
+  .option-label:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .option-label input[type="radio"] { display: none; }
+
+  .option-label.selected {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .option-dot {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border2);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .option-label.selected .option-dot {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .option-label.selected .option-dot::after {
+    content: '';
+    width: 6px; height: 6px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  /* INFOS FORM */
+  .infos-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+
+  .infos-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+    margin-bottom: 20px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field.full { grid-column: 1 / -1; }
+
+  .form-field label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink2);
+  }
+
+  .form-field input,
+  .form-field select {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus { border-color: var(--accent); background: white; }
+
+  /* SUBMIT */
+  .submit-area {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+  }
+
+  .submit-note {
+    font-size: 0.82rem;
+    color: var(--ink3);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 48px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: -0.01em;
+  }
+
+  .btn-submit:hover { background: #1540b0; transform: translateY(-1px); }
+  .btn-submit:disabled { background: #93b4ff; cursor: not-allowed; transform: none; }
+
+  /* RESULT */
+  .result-card {
+    display: none;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .result-icon { font-size: 3rem; margin-bottom: 16px; }
+
+  .result-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .result-intro {
+    color: var(--ink2);
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .lacunes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .lacune-chip {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: 1.5px solid;
+  }
+
+  .chip-6 { background: var(--tag-6-bg); color: var(--tag-6); border-color: #c4b5fd; }
+  .chip-5 { background: var(--tag-5-bg); color: var(--tag-5); border-color: #93c5fd; }
+  .chip-4 { background: var(--tag-4-bg); color: var(--tag-4); border-color: #5eead4; }
+  .chip-3 { background: var(--tag-3-bg); color: var(--tag-3); border-color: #fcd34d; }
+
+  .result-mail-note {
+    font-size: 0.82rem;
+    color: var(--ink3);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: inline-block;
+  }
+
+  .no-lacune-msg {
+    background: var(--success-light);
+    border: 1.5px solid #86efac;
+    color: var(--success);
+    border-radius: 10px;
+    padding: 16px 24px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container { padding: 0 16px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .section-header { flex-wrap: wrap; }
+    .intro-block h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-mark">A</div>
+  <div class="logo-text">L'Académie <span>des Maths</span></div>
+  <span class="header-badge">Évaluation diagnostique</span>
+</header>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="intro-block">
+    <h1>Évaluation diagnostique</h1>
+    <p>Cette évaluation permet à ton professeur d'identifier tes points forts et les notions à renforcer. Il n'y a pas de note — sois honnête dans tes réponses, c'est dans ton intérêt.</p>
+    <div class="consignes">
+      <div class="consigne-badge interdit">🚫 Calculatrice interdite</div>
+      <div class="consigne-badge oblig">✏️ Brouillon obligatoire</div>
+      <div class="consigne-badge">⏱️ Durée estimée : 50 min</div>
+    </div>
+  </div>
+
+  <!-- INFOS ÉLÈVE -->
+  <div class="infos-card">
+    <div class="infos-title">Tes informations</div>
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Nom *</label>
+        <input type="text" id="nom" placeholder="Ex : Martin" />
+      </div>
+      <div class="form-field">
+        <label>Prénom *</label>
+        <input type="text" id="prenom" placeholder="Ex : Lucas" />
+      </div>
+      <div class="form-field full">
+        <label>Établissement *</label>
+        <select id="etablissement" onchange="updateClasses()">
+          <option value="">— Choisir son établissement —</option>
+          <option value="Lycée Benoît Fourneyron">Lycée Benoît Fourneyron (Saint-Étienne)</option>
+          <option value="Lycée Benoît Charvet">Lycée Benoît Charvet (Saint-Étienne)</option>
+          <option value="Lycée Léonard de Vinci">Lycée Léonard de Vinci (Monistrol-sur-Loire)</option>
+          <option value="Collège Le Monteil">Collège Le Monteil (Monistrol-sur-Loire)</option>
+          <option value="Lycée Claude Fauriel">Lycée Claude Fauriel (Saint-Étienne)</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <label>Classe *</label>
+        <select id="classe" disabled>
+          <option value="">— Choisir d'abord l'établissement —</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <label>Email (le tien ou celui de tes parents) *</label>
+        <input type="email" id="email" placeholder="exemple@mail.fr" />
+      </div>
+      <div class="form-field full">
+        <label>Numéro de téléphone</label>
+        <input type="tel" id="telephone" placeholder="06 XX XX XX XX" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar-wrap">
+    <div class="progress-info">
+      <span id="progress-label">0 question répondue</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- ===== THÈME 1 : NOMBRES ET FRACTIONS ===== -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-dot" style="background:#6b21a8"></div>
+      <span class="section-title">Thème 1 — Nombres & Fractions</span>
+      <span class="section-sub">6 questions</span>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q1</span>
+        <span class="level-tag tag-6eme">6ème</span>
+      </div>
+      <div class="question-text">Un gâteau est partagé en 8 parts égales. Julie en mange 3. Quelle fraction du gâteau a-t-elle mangée ?</div>
+      <div class="options" data-name="q1" data-correct="A">
+        <label class="option-label"><input type="radio" name="q1" value="A"><div class="option-dot"></div>3/8</label>
+        <label class="option-label"><input type="radio" name="q1" value="B"><div class="option-dot"></div>8/3</label>
+        <label class="option-label"><input type="radio" name="q1" value="C"><div class="option-dot"></div>3/5</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q2</span>
+        <span class="level-tag tag-6eme">6ème</span>
+      </div>
+      <div class="question-text">Calcule : 2/7 + 3/7</div>
+      <div class="options" data-name="q2" data-correct="B">
+        <label class="option-label"><input type="radio" name="q2" value="A"><div class="option-dot"></div>5/14</label>
+        <label class="option-label"><input type="radio" name="q2" value="B"><div class="option-dot"></div>5/7</label>
+        <label class="option-label"><input type="radio" name="q2" value="C"><div class="option-dot"></div>6/7</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q3</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Simplifie la fraction 12/18 le plus possible.</div>
+      <div class="options" data-name="q3" data-correct="C">
+        <label class="option-label"><input type="radio" name="q3" value="A"><div class="option-dot"></div>4/6</label>
+        <label class="option-label"><input type="radio" name="q3" value="B"><div class="option-dot"></div>6/9</label>
+        <label class="option-label"><input type="radio" name="q3" value="C"><div class="option-dot"></div>2/3</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q4</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Calcule : 1/4 + 3/8</div>
+      <div class="options" data-name="q4" data-correct="B">
+        <label class="option-label"><input type="radio" name="q4" value="A"><div class="option-dot"></div>4/12</label>
+        <label class="option-label"><input type="radio" name="q4" value="B"><div class="option-dot"></div>5/8</label>
+        <label class="option-label"><input type="radio" name="q4" value="C"><div class="option-dot"></div>4/8</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q5</span>
+        <span class="level-tag tag-4eme">4ème</span>
+      </div>
+      <div class="question-text">Calcule : 3/5 × 10</div>
+      <div class="options" data-name="q5" data-correct="A">
+        <label class="option-label"><input type="radio" name="q5" value="A"><div class="option-dot"></div>6</label>
+        <label class="option-label"><input type="radio" name="q5" value="B"><div class="option-dot"></div>30/5</label>
+        <label class="option-label"><input type="radio" name="q5" value="C"><div class="option-dot"></div>8</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q6</span>
+        <span class="level-tag tag-3eme">3ème</span>
+      </div>
+      <div class="question-text">Un ouvrier travaille 35 heures par semaine. Il a déjà travaillé 4/7 de sa semaine. Combien d'heures lui reste-t-il à travailler ?</div>
+      <div class="options" data-name="q6" data-correct="B">
+        <label class="option-label"><input type="radio" name="q6" value="A"><div class="option-dot"></div>20 heures</label>
+        <label class="option-label"><input type="radio" name="q6" value="B"><div class="option-dot"></div>15 heures</label>
+        <label class="option-label"><input type="radio" name="q6" value="C"><div class="option-dot"></div>25 heures</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== THÈME 2 : CALCUL ALGÉBRIQUE ===== -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-dot" style="background:#1d4ed8"></div>
+      <span class="section-title">Thème 2 — Calcul & Expressions algébriques</span>
+      <span class="section-sub">6 questions</span>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q7</span>
+        <span class="level-tag tag-6eme">6ème</span>
+      </div>
+      <div class="question-text">Calcule : 3 + 4 × 5</div>
+      <div class="options" data-name="q7" data-correct="C">
+        <label class="option-label"><input type="radio" name="q7" value="A"><div class="option-dot"></div>35</label>
+        <label class="option-label"><input type="radio" name="q7" value="B"><div class="option-dot"></div>32</label>
+        <label class="option-label"><input type="radio" name="q7" value="C"><div class="option-dot"></div>23</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q8</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Calcule : (7 + 3) × 2 − 4</div>
+      <div class="options" data-name="q8" data-correct="B">
+        <label class="option-label"><input type="radio" name="q8" value="A"><div class="option-dot"></div>10</label>
+        <label class="option-label"><input type="radio" name="q8" value="B"><div class="option-dot"></div>16</label>
+        <label class="option-label"><input type="radio" name="q8" value="C"><div class="option-dot"></div>20</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q9</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Développe et réduis : 3 × (2x + 5)</div>
+      <div class="options" data-name="q9" data-correct="A">
+        <label class="option-label"><input type="radio" name="q9" value="A"><div class="option-dot"></div>6x + 15</label>
+        <label class="option-label"><input type="radio" name="q9" value="B"><div class="option-dot"></div>6x + 5</label>
+        <label class="option-label"><input type="radio" name="q9" value="C"><div class="option-dot"></div>5x + 15</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q10</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Réduis : 5x + 3 − 2x + 7</div>
+      <div class="options" data-name="q10" data-correct="B">
+        <label class="option-label"><input type="radio" name="q10" value="A"><div class="option-dot"></div>3x + 4</label>
+        <label class="option-label"><input type="radio" name="q10" value="B"><div class="option-dot"></div>3x + 10</label>
+        <label class="option-label"><input type="radio" name="q10" value="C"><div class="option-dot"></div>7x + 10</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q11</span>
+        <span class="level-tag tag-4eme">4ème</span>
+      </div>
+      <div class="question-text">Factorise : 6x + 9</div>
+      <div class="options" data-name="q11" data-correct="C">
+        <label class="option-label"><input type="radio" name="q11" value="A"><div class="option-dot"></div>2(3x + 9)</label>
+        <label class="option-label"><input type="radio" name="q11" value="B"><div class="option-dot"></div>6(x + 3)</label>
+        <label class="option-label"><input type="radio" name="q11" value="C"><div class="option-dot"></div>3(2x + 3)</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q12</span>
+        <span class="level-tag tag-3eme">3ème</span>
+      </div>
+      <div class="question-text">Un plombier facture 40 € de déplacement plus 25 € par heure. La facture totale est de 115 €. Combien d'heures a-t-il travaillé ?</div>
+      <div class="options" data-name="q12" data-correct="B">
+        <label class="option-label"><input type="radio" name="q12" value="A"><div class="option-dot"></div>2 heures</label>
+        <label class="option-label"><input type="radio" name="q12" value="B"><div class="option-dot"></div>3 heures</label>
+        <label class="option-label"><input type="radio" name="q12" value="C"><div class="option-dot"></div>4 heures</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== THÈME 3 : PROPORTIONNALITÉ ===== -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-dot" style="background:#0f766e"></div>
+      <span class="section-title">Thème 3 — Proportionnalité & Pourcentages</span>
+      <span class="section-sub">6 questions</span>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q13</span>
+        <span class="level-tag tag-6eme">6ème</span>
+      </div>
+      <div class="question-text">4 sandwichs coûtent 12 €. Combien coûtent 7 sandwichs ?</div>
+      <div class="options" data-name="q13" data-correct="C">
+        <label class="option-label"><input type="radio" name="q13" value="A"><div class="option-dot"></div>18 €</label>
+        <label class="option-label"><input type="radio" name="q13" value="B"><div class="option-dot"></div>19 €</label>
+        <label class="option-label"><input type="radio" name="q13" value="C"><div class="option-dot"></div>21 €</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q14</span>
+        <span class="level-tag tag-6eme">6ème</span>
+      </div>
+      <div class="question-text">Dans un atelier de 30 élèves, 10 % sont absents. Combien d'élèves sont absents ?</div>
+      <div class="options" data-name="q14" data-correct="A">
+        <label class="option-label"><input type="radio" name="q14" value="A"><div class="option-dot"></div>3 élèves</label>
+        <label class="option-label"><input type="radio" name="q14" value="B"><div class="option-dot"></div>5 élèves</label>
+        <label class="option-label"><input type="radio" name="q14" value="C"><div class="option-dot"></div>10 élèves</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q15</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Un article coûte 80 €. Il est soldé à 25 %. Quel est le montant de la réduction ?</div>
+      <div class="options" data-name="q15" data-correct="B">
+        <label class="option-label"><input type="radio" name="q15" value="A"><div class="option-dot"></div>15 €</label>
+        <label class="option-label"><input type="radio" name="q15" value="B"><div class="option-dot"></div>20 €</label>
+        <label class="option-label"><input type="radio" name="q15" value="C"><div class="option-dot"></div>25 €</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q16</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Deux apprentis se partagent un pourboire de 24 € selon le ratio 1:3. Combien chacun reçoit-il ?</div>
+      <div class="options" data-name="q16" data-correct="A">
+        <label class="option-label"><input type="radio" name="q16" value="A"><div class="option-dot"></div>6 € et 18 €</label>
+        <label class="option-label"><input type="radio" name="q16" value="B"><div class="option-dot"></div>8 € et 16 €</label>
+        <label class="option-label"><input type="radio" name="q16" value="C"><div class="option-dot"></div>12 € et 12 €</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q17</span>
+        <span class="level-tag tag-4eme">4ème</span>
+      </div>
+      <div class="question-text">Sur un plan à l'échelle 1:50, une pièce mesure 6 cm. Quelle est sa longueur réelle en mètres ?</div>
+      <div class="options" data-name="q17" data-correct="B">
+        <label class="option-label"><input type="radio" name="q17" value="A"><div class="option-dot"></div>2 m</label>
+        <label class="option-label"><input type="radio" name="q17" value="B"><div class="option-dot"></div>3 m</label>
+        <label class="option-label"><input type="radio" name="q17" value="C"><div class="option-dot"></div>6 m</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q18</span>
+        <span class="level-tag tag-3eme">3ème</span>
+      </div>
+      <div class="question-text">Un matériau coûtait 200 € l'année dernière. Son prix a augmenté de 15 %. Quel est son nouveau prix ?</div>
+      <div class="options" data-name="q18" data-correct="C">
+        <label class="option-label"><input type="radio" name="q18" value="A"><div class="option-dot"></div>215 €</label>
+        <label class="option-label"><input type="radio" name="q18" value="B"><div class="option-dot"></div>220 €</label>
+        <label class="option-label"><input type="radio" name="q18" value="C"><div class="option-dot"></div>230 €</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== THÈME 4 : GRANDEURS ET MESURES ===== -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-dot" style="background:#b45309"></div>
+      <span class="section-title">Thème 4 — Grandeurs & Mesures</span>
+      <span class="section-sub">5 questions</span>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q19</span>
+        <span class="level-tag tag-6eme">6ème</span>
+      </div>
+      <div class="question-text">Un carreleur doit carreler une pièce rectangulaire de 4 m de longueur et 3 m de largeur. Quelle est l'aire de cette pièce ?</div>
+      <div class="options" data-name="q19" data-correct="B">
+        <label class="option-label"><input type="radio" name="q19" value="A"><div class="option-dot"></div>14 m²</label>
+        <label class="option-label"><input type="radio" name="q19" value="B"><div class="option-dot"></div>12 m²</label>
+        <label class="option-label"><input type="radio" name="q19" value="C"><div class="option-dot"></div>7 m²</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q20</span>
+        <span class="level-tag tag-6eme">6ème</span>
+      </div>
+      <div class="question-text">Une enseigne triangulaire a une base de 6 m et une hauteur de 4 m. Quelle est son aire ?</div>
+      <div class="options" data-name="q20" data-correct="A">
+        <label class="option-label"><input type="radio" name="q20" value="A"><div class="option-dot"></div>12 m²</label>
+        <label class="option-label"><input type="radio" name="q20" value="B"><div class="option-dot"></div>24 m²</label>
+        <label class="option-label"><input type="radio" name="q20" value="C"><div class="option-dot"></div>10 m²</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q21</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Un menuisier a besoin de 35 000 cm² de panneau de bois. Combien cela fait-il en m² ?</div>
+      <div class="options" data-name="q21" data-correct="C">
+        <label class="option-label"><input type="radio" name="q21" value="A"><div class="option-dot"></div>350 m²</label>
+        <label class="option-label"><input type="radio" name="q21" value="B"><div class="option-dot"></div>35 m²</label>
+        <label class="option-label"><input type="radio" name="q21" value="C"><div class="option-dot"></div>3,5 m²</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q22</span>
+        <span class="level-tag tag-4eme">4ème</span>
+      </div>
+      <div class="question-text">Un bloc de béton (pavé droit) mesure 50 cm × 20 cm × 15 cm. Quel est son volume en litres ?</div>
+      <div class="options" data-name="q22" data-correct="B">
+        <label class="option-label"><input type="radio" name="q22" value="A"><div class="option-dot"></div>10 litres</label>
+        <label class="option-label"><input type="radio" name="q22" value="B"><div class="option-dot"></div>15 litres</label>
+        <label class="option-label"><input type="radio" name="q22" value="C"><div class="option-dot"></div>150 litres</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q23</span>
+        <span class="level-tag tag-3eme">3ème</span>
+      </div>
+      <div class="question-text">Un peintre parcourt 90 km à 60 km/h. Combien de temps dure son trajet ?</div>
+      <div class="options" data-name="q23" data-correct="A">
+        <label class="option-label"><input type="radio" name="q23" value="A"><div class="option-dot"></div>1h30</label>
+        <label class="option-label"><input type="radio" name="q23" value="B"><div class="option-dot"></div>1h15</label>
+        <label class="option-label"><input type="radio" name="q23" value="C"><div class="option-dot"></div>2h00</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== THÈME 5 : GÉOMÉTRIE ===== -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-dot" style="background:#be185d"></div>
+      <span class="section-title">Thème 5 — Géométrie plane</span>
+      <span class="section-sub">4 questions</span>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q24</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Deux murs sont parallèles. Un câble traverse le couloir en faisant un angle de 65° avec le premier mur. Quel angle fait ce câble avec le second mur ?</div>
+      <div class="options" data-name="q24" data-correct="A">
+        <label class="option-label"><input type="radio" name="q24" value="A"><div class="option-dot"></div>65°</label>
+        <label class="option-label"><input type="radio" name="q24" value="B"><div class="option-dot"></div>115°</label>
+        <label class="option-label"><input type="radio" name="q24" value="C"><div class="option-dot"></div>25°</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q25</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Sur un patron de couture, une pièce est symétrique par rapport à un axe. Un côté mesure 12 cm. Quelle est la longueur totale des deux côtés symétriques ?</div>
+      <div class="options" data-name="q25" data-correct="B">
+        <label class="option-label"><input type="radio" name="q25" value="A"><div class="option-dot"></div>12 cm</label>
+        <label class="option-label"><input type="radio" name="q25" value="B"><div class="option-dot"></div>24 cm</label>
+        <label class="option-label"><input type="radio" name="q25" value="C"><div class="option-dot"></div>6 cm</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q26</span>
+        <span class="level-tag tag-4eme">4ème</span>
+      </div>
+      <div class="question-text">Un échafaudage est appuyé contre un mur. Le pied est à 1,5 m du mur, la hauteur atteinte est de 4 m. Quelle est la longueur de l'échafaudage ? (au centième près)</div>
+      <div class="options" data-name="q26" data-correct="C">
+        <label class="option-label"><input type="radio" name="q26" value="A"><div class="option-dot"></div>4,20 m</label>
+        <label class="option-label"><input type="radio" name="q26" value="B"><div class="option-dot"></div>4,10 m</label>
+        <label class="option-label"><input type="radio" name="q26" value="C"><div class="option-dot"></div>4,27 m</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q27</span>
+        <span class="level-tag tag-3eme">3ème</span>
+      </div>
+      <div class="question-text">Une rampe fait un angle de 5° avec le sol. La longueur de la rampe est de 6 m. Quelle est la hauteur h atteinte ? (sin 5° ≈ 0,087)</div>
+      <div class="options" data-name="q27" data-correct="A">
+        <label class="option-label"><input type="radio" name="q27" value="A"><div class="option-dot"></div>0,52 m</label>
+        <label class="option-label"><input type="radio" name="q27" value="B"><div class="option-dot"></div>0,87 m</label>
+        <label class="option-label"><input type="radio" name="q27" value="C"><div class="option-dot"></div>1,04 m</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== THÈME 6 : FONCTIONS ===== -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-dot" style="background:#0369a1"></div>
+      <span class="section-title">Thème 6 — Fonctions & Représentations</span>
+      <span class="section-sub">2 questions</span>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q28</span>
+        <span class="level-tag tag-5eme">5ème</span>
+      </div>
+      <div class="question-text">Un électricien facture 30 € par heure. Pour 4 heures de travail, combien facture-t-il ?</div>
+      <div class="options" data-name="q28" data-correct="B">
+        <label class="option-label"><input type="radio" name="q28" value="A"><div class="option-dot"></div>100 €</label>
+        <label class="option-label"><input type="radio" name="q28" value="B"><div class="option-dot"></div>120 €</label>
+        <label class="option-label"><input type="radio" name="q28" value="C"><div class="option-dot"></div>90 €</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-meta">
+        <span class="q-num">Q29</span>
+        <span class="level-tag tag-3eme">3ème</span>
+      </div>
+      <div class="question-text">Un chauffagiste facture 50 € fixe + 40 € par heure. Combien d'heures a-t-il travaillé si la facture est de 210 € ?</div>
+      <div class="options" data-name="q29" data-correct="C">
+        <label class="option-label"><input type="radio" name="q29" value="A"><div class="option-dot"></div>3 heures</label>
+        <label class="option-label"><input type="radio" name="q29" value="B"><div class="option-dot"></div>3h30</label>
+        <label class="option-label"><input type="radio" name="q29" value="C"><div class="option-dot"></div>4 heures</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-area">
+    <p class="submit-note">En cliquant sur Envoyer, tes résultats seront transmis à ton professeur et un bilan sera envoyé par email.</p>
+    <button class="btn-submit" id="btn-submit" onclick="soumettre()">Envoyer mes résultats</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card" id="result-card">
+    <div class="result-icon" id="result-icon">📊</div>
+    <div class="result-name" id="result-name"></div>
+    <div class="result-intro" id="result-intro"></div>
+    <div class="lacunes-grid" id="lacunes-grid"></div>
+    <div class="result-mail-note" id="result-mail-note"></div>
+  </div>
+
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlBMjVXIg58lsopoeQ5sEZW-jcQIOrOtnWwCGVtHLGjcmpi9exaYZ3oAEre4deZum2/exec";
+const GITHUB_BASE = "https://arnaudreydellet.github.io/TMA-CCF/";
+
+const CLASSES_LYCEE = ["2nde A","2nde B","2nde C","2nde D","2nde E"];
+const CLASSES_COLLEGE = ["6ème A","6ème B","6ème C","6ème D","6ème E","5ème A","5ème B","5ème C","5ème D","5ème E","4ème A","4ème B","4ème C","4ème D","4ème E","3ème A","3ème B","3ème C","3ème D","3ème E"];
+const LYCEES = ["Lycée Benoît Fourneyron","Lycée Benoît Charvet","Lycée Léonard de Vinci","Lycée Claude Fauriel"];
+const COLLEGE = ["Collège Le Monteil"];
+
+// Questions et thèmes
+const QUESTIONS = {
+  q1:{theme:"Fractions",niveau:"6ème"}, q2:{theme:"Fractions",niveau:"6ème"},
+  q3:{theme:"Fractions",niveau:"5ème"}, q4:{theme:"Fractions",niveau:"5ème"},
+  q5:{theme:"Fractions",niveau:"4ème"}, q6:{theme:"Fractions",niveau:"3ème"},
+  q7:{theme:"Calcul algébrique",niveau:"6ème"}, q8:{theme:"Calcul algébrique",niveau:"5ème"},
+  q9:{theme:"Calcul algébrique",niveau:"5ème"}, q10:{theme:"Calcul algébrique",niveau:"5ème"},
+  q11:{theme:"Calcul algébrique",niveau:"4ème"}, q12:{theme:"Calcul algébrique",niveau:"3ème"},
+  q13:{theme:"Proportionnalité",niveau:"6ème"}, q14:{theme:"Proportionnalité",niveau:"6ème"},
+  q15:{theme:"Proportionnalité",niveau:"5ème"}, q16:{theme:"Proportionnalité",niveau:"5ème"},
+  q17:{theme:"Proportionnalité",niveau:"4ème"}, q18:{theme:"Proportionnalité",niveau:"3ème"},
+  q19:{theme:"Grandeurs & Mesures",niveau:"6ème"}, q20:{theme:"Grandeurs & Mesures",niveau:"6ème"},
+  q21:{theme:"Grandeurs & Mesures",niveau:"5ème"}, q22:{theme:"Grandeurs & Mesures",niveau:"4ème"},
+  q23:{theme:"Grandeurs & Mesures",niveau:"3ème"},
+  q24:{theme:"Géométrie",niveau:"5ème"}, q25:{theme:"Géométrie",niveau:"5ème"},
+  q26:{theme:"Géométrie",niveau:"4ème"}, q27:{theme:"Géométrie",niveau:"3ème"},
+  q28:{theme:"Fonctions",niveau:"5ème"}, q29:{theme:"Fonctions",niveau:"3ème"}
+};
+
+const CORRIGES = {
+  q1:"A",q2:"B",q3:"C",q4:"B",q5:"A",q6:"B",
+  q7:"C",q8:"B",q9:"A",q10:"B",q11:"C",q12:"B",
+  q13:"C",q14:"A",q15:"B",q16:"A",q17:"B",q18:"C",
+  q19:"B",q20:"A",q21:"C",q22:"B",q23:"A",
+  q24:"A",q25:"B",q26:"C",q27:"A",
+  q28:"B",q29:"C"
+};
+
+const TOTAL_QUESTIONS = Object.keys(CORRIGES).length;
+
+// Liens fiches par thème/niveau
+const FICHES = {
+  "Fractions_6ème": GITHUB_BASE + "fiche-fractions-6eme",
+  "Fractions_5ème": GITHUB_BASE + "fiche-fractions-5eme",
+  "Fractions_4ème": GITHUB_BASE + "fiche-fractions-4eme",
+  "Fractions_3ème": GITHUB_BASE + "fiche-fractions-3eme",
+  "Calcul algébrique_6ème": GITHUB_BASE + "fiche-calcul-6eme",
+  "Calcul algébrique_5ème": GITHUB_BASE + "fiche-calcul-5eme",
+  "Calcul algébrique_4ème": GITHUB_BASE + "fiche-calcul-4eme",
+  "Calcul algébrique_3ème": GITHUB_BASE + "fiche-calcul-3eme",
+  "Proportionnalité_6ème": GITHUB_BASE + "fiche-proportionnalite-6eme",
+  "Proportionnalité_5ème": GITHUB_BASE + "fiche-proportionnalite-5eme",
+  "Proportionnalité_4ème": GITHUB_BASE + "fiche-proportionnalite-4eme",
+  "Proportionnalité_3ème": GITHUB_BASE + "fiche-proportionnalite-3eme",
+  "Grandeurs & Mesures_6ème": GITHUB_BASE + "fiche-mesures-6eme",
+  "Grandeurs & Mesures_5ème": GITHUB_BASE + "fiche-mesures-5eme",
+  "Grandeurs & Mesures_4ème": GITHUB_BASE + "fiche-mesures-4eme",
+  "Grandeurs & Mesures_3ème": GITHUB_BASE + "fiche-mesures-3eme",
+  "Géométrie_5ème": GITHUB_BASE + "fiche-geometrie-5eme",
+  "Géométrie_4ème": GITHUB_BASE + "fiche-geometrie-4eme",
+  "Géométrie_3ème": GITHUB_BASE + "fiche-geometrie-3eme",
+  "Fonctions_5ème": GITHUB_BASE + "fiche-fonctions-5eme",
+  "Fonctions_3ème": GITHUB_BASE + "fiche-fonctions-3eme"
+};
+
+// Classes dynamiques
+function updateClasses() {
+  const etab = document.getElementById("etablissement").value;
+  const sel = document.getElementById("classe");
+  sel.innerHTML = '<option value="">— Choisir sa classe —</option>';
+  sel.disabled = !etab;
+  if (!etab) return;
+  const isCollege = COLLEGE.includes(etab);
+  const classes = isCollege ? CLASSES_COLLEGE : CLASSES_LYCEE;
+  classes.forEach(c => {
+    const o = document.createElement("option");
+    o.value = c; o.textContent = c;
+    sel.appendChild(o);
+  });
+  sel.disabled = false;
+}
+
+// Options interactives
+document.querySelectorAll('.options').forEach(group => {
+  group.querySelectorAll('.option-label').forEach(label => {
+    label.addEventListener('click', () => {
+      group.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+      label.classList.add('selected');
+      label.querySelector('input').checked = true;
+      updateProgress();
+    });
+  });
+});
+
+function updateProgress() {
+  let answered = 0;
+  for (const q of Object.keys(CORRIGES)) {
+    if (document.querySelector(`input[name="${q}"]:checked`)) answered++;
+  }
+  const pct = Math.round(answered / TOTAL_QUESTIONS * 100);
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-label").textContent = answered + " question" + (answered > 1 ? "s" : "") + " répondue" + (answered > 1 ? "s" : "");
+  document.getElementById("progress-pct").textContent = pct + "%";
+}
+
+function soumettre() {
+  const nom = document.getElementById("nom").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const telephone = document.getElementById("telephone").value.trim();
+  const classe = document.getElementById("classe").value;
+  const etablissement = document.getElementById("etablissement").value;
+
+  if (!nom || !prenom || !email || !classe || !etablissement) {
+    alert("Merci de remplir tous les champs obligatoires (*).");
+    return;
+  }
+
+  // Calcul scores et lacunes par thème/niveau
+  const scores = {};
+  const totaux = {};
+
+  for (const [q, info] of Object.entries(QUESTIONS)) {
+    const key = info.theme + "_" + info.niveau;
+    if (!totaux[key]) { totaux[key] = 0; scores[key] = 0; }
+    totaux[key]++;
+    const rep = document.querySelector(`input[name="${q}"]:checked`);
+    if (rep && rep.value === CORRIGES[q]) scores[key]++;
+  }
+
+  // Lacunes = score < totaux (au moins une erreur)
+  const lacunes = [];
+  for (const key of Object.keys(totaux)) {
+    if (scores[key] < totaux[key]) lacunes.push(key);
+  }
+
+  // Liens fiches personnalisés
+  const fiches_liens = lacunes.map(l => ({ lacune: l, lien: FICHES[l] || GITHUB_BASE }));
+
+  const btn = document.getElementById("btn-submit");
+  btn.disabled = true;
+  btn.textContent = "Envoi en cours...";
+
+  const payload = {
+    nom, prenom, email, telephone, classe, etablissement,
+    scores: JSON.stringify(scores),
+    lacunes: lacunes.join(" | "),
+    fiches: JSON.stringify(fiches_liens),
+    timestamp: new Date().toISOString()
+  };
+
+  fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) })
+    .then(r => r.json())
+    .then(() => afficherResultat(prenom, lacunes))
+    .catch(() => afficherResultat(prenom, lacunes));
+}
+
+function afficherResultat(prenom, lacunes) {
+  document.querySelector('.infos-card').style.display = 'none';
+  document.querySelectorAll('.section-card').forEach(s => s.style.display = 'none');
+  document.querySelector('.submit-area').style.display = 'none';
+  document.querySelector('.progress-bar-wrap').style.display = 'none';
+
+  const rc = document.getElementById("result-card");
+  rc.style.display = "block";
+
+  const niveauColors = { "6ème":"chip-6", "5ème":"chip-5", "4ème":"chip-4", "3ème":"chip-3" };
+
+  if (lacunes.length === 0) {
+    document.getElementById("result-icon").textContent = "🎉";
+    document.getElementById("result-name").textContent = "Excellent, " + prenom + " !";
+    document.getElementById("result-intro").textContent = "Aucune lacune détectée. Tu maîtrises l'ensemble des notions évaluées.";
+    document.getElementById("result-mail-note").textContent = "Un bilan de résultats a été transmis à ton professeur.";
+  } else {
+    document.getElementById("result-icon").textContent = "📋";
+    document.getElementById("result-name").textContent = lacunes.length + " lacune" + (lacunes.length > 1 ? "s" : "") + " détectée" + (lacunes.length > 1 ? "s" : "");
+    document.getElementById("result-intro").textContent = "Les notions suivantes nécessitent une révision. Des fiches de travail vont être envoyées par email.";
+
+    const grid = document.getElementById("lacunes-grid");
+    lacunes.forEach(l => {
+      const parts = l.split("_");
+      const theme = parts[0];
+      const niveau = parts[1];
+      const chip = document.createElement("div");
+      chip.className = "lacune-chip " + (niveauColors[niveau] || "chip-5");
+      chip.textContent = theme + " · " + niveau;
+      grid.appendChild(chip);
+    });
+
+    document.getElementById("result-mail-note").textContent = "📧 Un email avec tes fiches de travail personnalisées a été envoyé.";
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
