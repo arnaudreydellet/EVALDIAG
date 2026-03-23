@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L'Académie des Maths — Évaluation diagnostique</title>
+<title>Lycée Benoit Fourneyron — Évaluation diagnostique</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -42,7 +42,6 @@
     padding-bottom: 60px;
   }
 
-  /* HEADER */
   .site-header {
     background: var(--ink);
     padding: 20px 40px;
@@ -81,14 +80,12 @@
     text-transform: uppercase;
   }
 
-  /* CONTAINER */
   .container {
     max-width: 760px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
-  /* INTRO */
   .intro-block {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -134,10 +131,7 @@
   .consigne-badge.interdit { border-color: #fca5a5; background: #fef2f2; color: #dc2626; }
   .consigne-badge.oblig { border-color: #86efac; background: #f0fdf4; color: #16a34a; }
 
-  /* PROGRESS */
-  .progress-bar-wrap {
-    margin-bottom: 32px;
-  }
+  .progress-bar-wrap { margin-bottom: 32px; }
 
   .progress-info {
     display: flex;
@@ -163,7 +157,6 @@
     width: 0%;
   }
 
-  /* SECTION */
   .section-card {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -200,7 +193,6 @@
     font-family: 'Geist Mono', monospace;
   }
 
-  /* QUESTION */
   .question-block {
     padding: 22px 28px;
     border-bottom: 1px solid var(--border);
@@ -303,7 +295,6 @@
     border-radius: 50%;
   }
 
-  /* INFOS FORM */
   .infos-card {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -318,6 +309,20 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--ink3);
+    margin-bottom: 20px;
+  }
+
+  .etablissement-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-light);
+    border: 1.5px solid #93b4ff;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent);
     margin-bottom: 20px;
   }
 
@@ -352,7 +357,8 @@
   .form-field input:focus,
   .form-field select:focus { border-color: var(--accent); background: white; }
 
-  /* SUBMIT */
+  .form-field select:disabled { opacity: 0.5; cursor: not-allowed; }
+
   .submit-area {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -385,7 +391,6 @@
   .btn-submit:hover { background: #1540b0; transform: translateY(-1px); }
   .btn-submit:disabled { background: #93b4ff; cursor: not-allowed; transform: none; }
 
-  /* RESULT */
   .result-card {
     display: none;
     background: var(--surface);
@@ -467,14 +472,13 @@
 <body>
 
 <header class="site-header">
-  <div class="logo-mark">A</div>
-  <div class="logo-text">L'Académie <span>des Maths</span></div>
-  <span class="header-badge">Évaluation diagnostique</span>
+  <div class="logo-mark">F</div>
+  <div class="logo-text">Lycée Benoit <span>Fourneyron</span></div>
+  <span class="header-badge">Évaluation diagnostique · Mathématiques</span>
 </header>
 
 <div class="container">
 
-  <!-- INTRO -->
   <div class="intro-block">
     <h1>Évaluation diagnostique</h1>
     <p>Cette évaluation permet à ton professeur d'identifier tes points forts et les notions à renforcer. Il n'y a pas de note — sois honnête dans tes réponses, c'est dans ton intérêt.</p>
@@ -488,6 +492,12 @@
   <!-- INFOS ÉLÈVE -->
   <div class="infos-card">
     <div class="infos-title">Tes informations</div>
+
+    <!-- Badge établissement fixe -->
+    <div class="etablissement-badge">
+      🏫 Lycée Benoit Fourneyron — Saint-Étienne
+    </div>
+
     <div class="form-grid">
       <div class="form-field">
         <label>Nom *</label>
@@ -497,23 +507,25 @@
         <label>Prénom *</label>
         <input type="text" id="prenom" placeholder="Ex : Lucas" />
       </div>
+
+      <!-- Niveau -->
       <div class="form-field full">
-        <label>Établissement *</label>
-        <select id="etablissement" onchange="updateClasses()">
-          <option value="">— Choisir son établissement —</option>
-          <option value="Lycée Benoît Fourneyron">Lycée Benoît Fourneyron (Saint-Étienne)</option>
-          <option value="Lycée Benoît Charvet">Lycée Benoît Charvet (Saint-Étienne)</option>
-          <option value="Lycée Léonard de Vinci">Lycée Léonard de Vinci (Monistrol-sur-Loire)</option>
-          <option value="Collège Le Monteil">Collège Le Monteil (Monistrol-sur-Loire)</option>
-          <option value="Lycée Claude Fauriel">Lycée Claude Fauriel (Saint-Étienne)</option>
+        <label>Niveau *</label>
+        <select id="niveau" onchange="updateClasses()">
+          <option value="">— Choisir son niveau —</option>
+          <option value="CAP">Seconde CAP</option>
+          <option value="BacPro">Seconde Bac Pro</option>
         </select>
       </div>
+
+      <!-- Classe filtrée -->
       <div class="form-field full">
         <label>Classe *</label>
         <select id="classe" disabled>
-          <option value="">— Choisir d'abord l'établissement —</option>
+          <option value="">— Choisir d'abord son niveau —</option>
         </select>
       </div>
+
       <div class="form-field full">
         <label>Email (le tien ou celui de tes parents) *</label>
         <input type="email" id="email" placeholder="exemple@mail.fr" />
@@ -545,10 +557,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q1</span>
-        <span class="level-tag tag-6eme">6ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q1</span><span class="level-tag tag-6eme">6ème</span></div>
       <div class="question-text">Un gâteau est partagé en 8 parts égales. Julie en mange 3. Quelle fraction du gâteau a-t-elle mangée ?</div>
       <div class="options" data-name="q1" data-correct="A">
         <label class="option-label"><input type="radio" name="q1" value="A"><div class="option-dot"></div>3/8</label>
@@ -558,10 +567,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q2</span>
-        <span class="level-tag tag-6eme">6ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q2</span><span class="level-tag tag-6eme">6ème</span></div>
       <div class="question-text">Calcule : 2/7 + 3/7</div>
       <div class="options" data-name="q2" data-correct="B">
         <label class="option-label"><input type="radio" name="q2" value="A"><div class="option-dot"></div>5/14</label>
@@ -571,10 +577,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q3</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q3</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Simplifie la fraction 12/18 le plus possible.</div>
       <div class="options" data-name="q3" data-correct="C">
         <label class="option-label"><input type="radio" name="q3" value="A"><div class="option-dot"></div>4/6</label>
@@ -584,10 +587,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q4</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q4</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Calcule : 1/4 + 3/8</div>
       <div class="options" data-name="q4" data-correct="B">
         <label class="option-label"><input type="radio" name="q4" value="A"><div class="option-dot"></div>4/12</label>
@@ -597,10 +597,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q5</span>
-        <span class="level-tag tag-4eme">4ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q5</span><span class="level-tag tag-4eme">4ème</span></div>
       <div class="question-text">Calcule : 3/5 × 10</div>
       <div class="options" data-name="q5" data-correct="A">
         <label class="option-label"><input type="radio" name="q5" value="A"><div class="option-dot"></div>6</label>
@@ -610,10 +607,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q6</span>
-        <span class="level-tag tag-3eme">3ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q6</span><span class="level-tag tag-3eme">3ème</span></div>
       <div class="question-text">Un ouvrier travaille 35 heures par semaine. Il a déjà travaillé 4/7 de sa semaine. Combien d'heures lui reste-t-il à travailler ?</div>
       <div class="options" data-name="q6" data-correct="B">
         <label class="option-label"><input type="radio" name="q6" value="A"><div class="option-dot"></div>20 heures</label>
@@ -632,10 +626,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q7</span>
-        <span class="level-tag tag-6eme">6ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q7</span><span class="level-tag tag-6eme">6ème</span></div>
       <div class="question-text">Calcule : 3 + 4 × 5</div>
       <div class="options" data-name="q7" data-correct="C">
         <label class="option-label"><input type="radio" name="q7" value="A"><div class="option-dot"></div>35</label>
@@ -645,10 +636,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q8</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q8</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Calcule : (7 + 3) × 2 − 4</div>
       <div class="options" data-name="q8" data-correct="B">
         <label class="option-label"><input type="radio" name="q8" value="A"><div class="option-dot"></div>10</label>
@@ -658,10 +646,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q9</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q9</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Développe et réduis : 3 × (2x + 5)</div>
       <div class="options" data-name="q9" data-correct="A">
         <label class="option-label"><input type="radio" name="q9" value="A"><div class="option-dot"></div>6x + 15</label>
@@ -671,10 +656,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q10</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q10</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Réduis : 5x + 3 − 2x + 7</div>
       <div class="options" data-name="q10" data-correct="B">
         <label class="option-label"><input type="radio" name="q10" value="A"><div class="option-dot"></div>3x + 4</label>
@@ -684,10 +666,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q11</span>
-        <span class="level-tag tag-4eme">4ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q11</span><span class="level-tag tag-4eme">4ème</span></div>
       <div class="question-text">Factorise : 6x + 9</div>
       <div class="options" data-name="q11" data-correct="C">
         <label class="option-label"><input type="radio" name="q11" value="A"><div class="option-dot"></div>2(3x + 9)</label>
@@ -697,10 +676,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q12</span>
-        <span class="level-tag tag-3eme">3ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q12</span><span class="level-tag tag-3eme">3ème</span></div>
       <div class="question-text">Un plombier facture 40 € de déplacement plus 25 € par heure. La facture totale est de 115 €. Combien d'heures a-t-il travaillé ?</div>
       <div class="options" data-name="q12" data-correct="B">
         <label class="option-label"><input type="radio" name="q12" value="A"><div class="option-dot"></div>2 heures</label>
@@ -719,10 +695,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q13</span>
-        <span class="level-tag tag-6eme">6ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q13</span><span class="level-tag tag-6eme">6ème</span></div>
       <div class="question-text">4 sandwichs coûtent 12 €. Combien coûtent 7 sandwichs ?</div>
       <div class="options" data-name="q13" data-correct="C">
         <label class="option-label"><input type="radio" name="q13" value="A"><div class="option-dot"></div>18 €</label>
@@ -732,10 +705,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q14</span>
-        <span class="level-tag tag-6eme">6ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q14</span><span class="level-tag tag-6eme">6ème</span></div>
       <div class="question-text">Dans un atelier de 30 élèves, 10 % sont absents. Combien d'élèves sont absents ?</div>
       <div class="options" data-name="q14" data-correct="A">
         <label class="option-label"><input type="radio" name="q14" value="A"><div class="option-dot"></div>3 élèves</label>
@@ -745,10 +715,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q15</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q15</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Un article coûte 80 €. Il est soldé à 25 %. Quel est le montant de la réduction ?</div>
       <div class="options" data-name="q15" data-correct="B">
         <label class="option-label"><input type="radio" name="q15" value="A"><div class="option-dot"></div>15 €</label>
@@ -758,10 +725,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q16</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q16</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Deux apprentis se partagent un pourboire de 24 € selon le ratio 1:3. Combien chacun reçoit-il ?</div>
       <div class="options" data-name="q16" data-correct="A">
         <label class="option-label"><input type="radio" name="q16" value="A"><div class="option-dot"></div>6 € et 18 €</label>
@@ -771,10 +735,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q17</span>
-        <span class="level-tag tag-4eme">4ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q17</span><span class="level-tag tag-4eme">4ème</span></div>
       <div class="question-text">Sur un plan à l'échelle 1:50, une pièce mesure 6 cm. Quelle est sa longueur réelle en mètres ?</div>
       <div class="options" data-name="q17" data-correct="B">
         <label class="option-label"><input type="radio" name="q17" value="A"><div class="option-dot"></div>2 m</label>
@@ -784,10 +745,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q18</span>
-        <span class="level-tag tag-3eme">3ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q18</span><span class="level-tag tag-3eme">3ème</span></div>
       <div class="question-text">Un matériau coûtait 200 € l'année dernière. Son prix a augmenté de 15 %. Quel est son nouveau prix ?</div>
       <div class="options" data-name="q18" data-correct="C">
         <label class="option-label"><input type="radio" name="q18" value="A"><div class="option-dot"></div>215 €</label>
@@ -806,10 +764,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q19</span>
-        <span class="level-tag tag-6eme">6ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q19</span><span class="level-tag tag-6eme">6ème</span></div>
       <div class="question-text">Un carreleur doit carreler une pièce rectangulaire de 4 m de longueur et 3 m de largeur. Quelle est l'aire de cette pièce ?</div>
       <div class="options" data-name="q19" data-correct="B">
         <label class="option-label"><input type="radio" name="q19" value="A"><div class="option-dot"></div>14 m²</label>
@@ -819,10 +774,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q20</span>
-        <span class="level-tag tag-6eme">6ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q20</span><span class="level-tag tag-6eme">6ème</span></div>
       <div class="question-text">Une enseigne triangulaire a une base de 6 m et une hauteur de 4 m. Quelle est son aire ?</div>
       <div class="options" data-name="q20" data-correct="A">
         <label class="option-label"><input type="radio" name="q20" value="A"><div class="option-dot"></div>12 m²</label>
@@ -832,10 +784,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q21</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q21</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Un menuisier a besoin de 35 000 cm² de panneau de bois. Combien cela fait-il en m² ?</div>
       <div class="options" data-name="q21" data-correct="C">
         <label class="option-label"><input type="radio" name="q21" value="A"><div class="option-dot"></div>350 m²</label>
@@ -845,10 +794,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q22</span>
-        <span class="level-tag tag-4eme">4ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q22</span><span class="level-tag tag-4eme">4ème</span></div>
       <div class="question-text">Un bloc de béton (pavé droit) mesure 50 cm × 20 cm × 15 cm. Quel est son volume en litres ?</div>
       <div class="options" data-name="q22" data-correct="B">
         <label class="option-label"><input type="radio" name="q22" value="A"><div class="option-dot"></div>10 litres</label>
@@ -858,10 +804,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q23</span>
-        <span class="level-tag tag-3eme">3ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q23</span><span class="level-tag tag-3eme">3ème</span></div>
       <div class="question-text">Un peintre parcourt 90 km à 60 km/h. Combien de temps dure son trajet ?</div>
       <div class="options" data-name="q23" data-correct="A">
         <label class="option-label"><input type="radio" name="q23" value="A"><div class="option-dot"></div>1h30</label>
@@ -880,10 +823,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q24</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q24</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Deux murs sont parallèles. Un câble traverse le couloir en faisant un angle de 65° avec le premier mur. Quel angle fait ce câble avec le second mur ?</div>
       <div class="options" data-name="q24" data-correct="A">
         <label class="option-label"><input type="radio" name="q24" value="A"><div class="option-dot"></div>65°</label>
@@ -893,10 +833,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q25</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q25</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Sur un patron de couture, une pièce est symétrique par rapport à un axe. Un côté mesure 12 cm. Quelle est la longueur totale des deux côtés symétriques ?</div>
       <div class="options" data-name="q25" data-correct="B">
         <label class="option-label"><input type="radio" name="q25" value="A"><div class="option-dot"></div>12 cm</label>
@@ -906,10 +843,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q26</span>
-        <span class="level-tag tag-4eme">4ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q26</span><span class="level-tag tag-4eme">4ème</span></div>
       <div class="question-text">Un échafaudage est appuyé contre un mur. Le pied est à 1,5 m du mur, la hauteur atteinte est de 4 m. Quelle est la longueur de l'échafaudage ? (au centième près)</div>
       <div class="options" data-name="q26" data-correct="C">
         <label class="option-label"><input type="radio" name="q26" value="A"><div class="option-dot"></div>4,20 m</label>
@@ -919,10 +853,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q27</span>
-        <span class="level-tag tag-3eme">3ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q27</span><span class="level-tag tag-3eme">3ème</span></div>
       <div class="question-text">Une rampe fait un angle de 5° avec le sol. La longueur de la rampe est de 6 m. Quelle est la hauteur h atteinte ? (sin 5° ≈ 0,087)</div>
       <div class="options" data-name="q27" data-correct="A">
         <label class="option-label"><input type="radio" name="q27" value="A"><div class="option-dot"></div>0,52 m</label>
@@ -941,10 +872,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q28</span>
-        <span class="level-tag tag-5eme">5ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q28</span><span class="level-tag tag-5eme">5ème</span></div>
       <div class="question-text">Un électricien facture 30 € par heure. Pour 4 heures de travail, combien facture-t-il ?</div>
       <div class="options" data-name="q28" data-correct="B">
         <label class="option-label"><input type="radio" name="q28" value="A"><div class="option-dot"></div>100 €</label>
@@ -954,10 +882,7 @@
     </div>
 
     <div class="question-block">
-      <div class="question-meta">
-        <span class="q-num">Q29</span>
-        <span class="level-tag tag-3eme">3ème</span>
-      </div>
+      <div class="question-meta"><span class="q-num">Q29</span><span class="level-tag tag-3eme">3ème</span></div>
       <div class="question-text">Un chauffagiste facture 50 € fixe + 40 € par heure. Combien d'heures a-t-il travaillé si la facture est de 210 € ?</div>
       <div class="options" data-name="q29" data-correct="C">
         <label class="option-label"><input type="radio" name="q29" value="A"><div class="option-dot"></div>3 heures</label>
@@ -970,7 +895,7 @@
   <!-- SUBMIT -->
   <div class="submit-area">
     <p class="submit-note">En cliquant sur Envoyer, tes résultats seront transmis à ton professeur et un bilan sera envoyé par email.</p>
-    <button class="btn-submit" id="btn-submit" onclick="soumettre()">Envoyer mes résultats</button>
+    <button class="btn-submit" id="btn-submit" onclick="soumettre()">Envoyer mes résultats 📊</button>
   </div>
 
   <!-- RESULT -->
@@ -987,13 +912,11 @@
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlBMjVXIg58lsopoeQ5sEZW-jcQIOrOtnWwCGVtHLGjcmpi9exaYZ3oAEre4deZum2/exec";
 const GITHUB_BASE = "https://arnaudreydellet.github.io/TMA-CCF/";
+const ETABLISSEMENT = "Lycée Benoît Fourneyron";
 
-const CLASSES_LYCEE = ["2nde A","2nde B","2nde C","2nde D","2nde E"];
-const CLASSES_COLLEGE = ["6ème A","6ème B","6ème C","6ème D","6ème E","5ème A","5ème B","5ème C","5ème D","5ème E","4ème A","4ème B","4ème C","4ème D","4ème E","3ème A","3ème B","3ème C","3ème D","3ème E"];
-const LYCEES = ["Lycée Benoît Fourneyron","Lycée Benoît Charvet","Lycée Léonard de Vinci","Lycée Claude Fauriel"];
-const COLLEGE = ["Collège Le Monteil"];
+const CLASSES_CAP = ["2nde Charpentier","2nde Ébéniste","2nde MIS","2nde EL"];
+const CLASSES_BACPRO = ["2nde OBPT","2nde TEBE","2nde TCB","2nde AMA","2nde TNE"];
 
-// Questions et thèmes
 const QUESTIONS = {
   q1:{theme:"Fractions",niveau:"6ème"}, q2:{theme:"Fractions",niveau:"6ème"},
   q3:{theme:"Fractions",niveau:"5ème"}, q4:{theme:"Fractions",niveau:"5ème"},
@@ -1023,7 +946,6 @@ const CORRIGES = {
 
 const TOTAL_QUESTIONS = Object.keys(CORRIGES).length;
 
-// Liens fiches par thème/niveau
 const FICHES = {
   "Fractions_6ème": GITHUB_BASE + "fiche-fractions-6eme",
   "Fractions_5ème": GITHUB_BASE + "fiche-fractions-5eme",
@@ -1048,15 +970,12 @@ const FICHES = {
   "Fonctions_3ème": GITHUB_BASE + "fiche-fonctions-3eme"
 };
 
-// Classes dynamiques
 function updateClasses() {
-  const etab = document.getElementById("etablissement").value;
+  const niveau = document.getElementById("niveau").value;
   const sel = document.getElementById("classe");
   sel.innerHTML = '<option value="">— Choisir sa classe —</option>';
-  sel.disabled = !etab;
-  if (!etab) return;
-  const isCollege = COLLEGE.includes(etab);
-  const classes = isCollege ? CLASSES_COLLEGE : CLASSES_LYCEE;
+  if (!niveau) { sel.disabled = true; return; }
+  const classes = niveau === "CAP" ? CLASSES_CAP : CLASSES_BACPRO;
   classes.forEach(c => {
     const o = document.createElement("option");
     o.value = c; o.textContent = c;
@@ -1065,7 +984,6 @@ function updateClasses() {
   sel.disabled = false;
 }
 
-// Options interactives
 document.querySelectorAll('.options').forEach(group => {
   group.querySelectorAll('.option-label').forEach(label => {
     label.addEventListener('click', () => {
@@ -1094,14 +1012,13 @@ function soumettre() {
   const email = document.getElementById("email").value.trim();
   const telephone = document.getElementById("telephone").value.trim();
   const classe = document.getElementById("classe").value;
-  const etablissement = document.getElementById("etablissement").value;
+  const niveau = document.getElementById("niveau").value;
 
-  if (!nom || !prenom || !email || !classe || !etablissement) {
+  if (!nom || !prenom || !email || !classe || !niveau) {
     alert("Merci de remplir tous les champs obligatoires (*).");
     return;
   }
 
-  // Calcul scores et lacunes par thème/niveau
   const scores = {};
   const totaux = {};
 
@@ -1113,13 +1030,11 @@ function soumettre() {
     if (rep && rep.value === CORRIGES[q]) scores[key]++;
   }
 
-  // Lacunes = score < totaux (au moins une erreur)
   const lacunes = [];
   for (const key of Object.keys(totaux)) {
     if (scores[key] < totaux[key]) lacunes.push(key);
   }
 
-  // Liens fiches personnalisés
   const fiches_liens = lacunes.map(l => ({ lacune: l, lien: FICHES[l] || GITHUB_BASE }));
 
   const btn = document.getElementById("btn-submit");
@@ -1127,7 +1042,9 @@ function soumettre() {
   btn.textContent = "Envoi en cours...";
 
   const payload = {
-    nom, prenom, email, telephone, classe, etablissement,
+    nom, prenom, email, telephone,
+    classe: classe + " (" + (niveau === "CAP" ? "CAP" : "Bac Pro") + ")",
+    etablissement: ETABLISSEMENT,
     scores: JSON.stringify(scores),
     lacunes: lacunes.join(" | "),
     fiches: JSON.stringify(fiches_liens),
@@ -1165,10 +1082,10 @@ function afficherResultat(prenom, lacunes) {
     lacunes.forEach(l => {
       const parts = l.split("_");
       const theme = parts[0];
-      const niveau = parts[1];
+      const niv = parts[1];
       const chip = document.createElement("div");
-      chip.className = "lacune-chip " + (niveauColors[niveau] || "chip-5");
-      chip.textContent = theme + " · " + niveau;
+      chip.className = "lacune-chip " + (niveauColors[niv] || "chip-5");
+      chip.textContent = theme + " · " + niv;
       grid.appendChild(chip);
     });
 
